@@ -12,6 +12,19 @@
       "sentAt": "2026-02-06T08:27:05.861Z",
       "providerMessageId": "mock-1770366425856-m90lrgm",
       "providerResponse": "\"250 2.0.0 OK (Mock)\""
+    },
+    {
+      "id": "b2a766db-3279-462f-9304-28a7b578a770",
+      "triggerId": "86f8776b-a829-4dd6-80fb-58df60e22448",
+      "toAddresses": "[\"ganeshkale@gmail.com\"]",
+      "subject": "Welcome to Cybaem Tech",
+      "status": "sent",
+      "attempts": 0,
+      "createdAt": "2026-02-11T05:41:38.166Z",
+      "updatedAt": "2026-02-11T05:41:38.168Z",
+      "sentAt": "2026-02-11T05:41:38.168Z",
+      "providerMessageId": "mock-1770788498167-31vhszu",
+      "providerResponse": "\"250 2.0.0 OK (Mock)\""
     }
   ]
 }

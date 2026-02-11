@@ -153,6 +153,17 @@
       "customBody": "<p>Hi Mr. Sujay Palande,</p><p>Your account has been successfully created.</p>",
       "sendMode": "immediate",
       "createdAt": "2026-02-06T08:27:00.796Z"
+    },
+    {
+      "id": "86f8776b-a829-4dd6-80fb-58df60e22448",
+      "customerId": "2",
+      "recipients": [
+        "ganeshkale@gmail.com"
+      ],
+      "customSubject": "Welcome to Cybaem Tech",
+      "customBody": "<p>Hi Mr. Ganesh K,</p><p>Your account has been successfully created.</p>",
+      "sendMode": "immediate",
+      "createdAt": "2026-02-11T05:41:33.152Z"
     }
   ]
 }
