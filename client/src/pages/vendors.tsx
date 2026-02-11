@@ -751,53 +751,87 @@ function VendorDetailPanel({ vendor, onClose, onEdit, onDelete }: VendorDetailPa
                                     )}
 
                                     {/* Activity Timeline Section */}
-                                    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden col-span-1 lg:col-span-2">
-                                        <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex items-center gap-2">
-                                            <Clock className="h-5 w-5 text-sidebar" />
-                                            <h3 className="font-semibold text-slate-900 dark:text-white">Activity Timeline</h3>
+                                    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden col-span-1 lg:col-span-2">
+                                        <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between bg-white dark:bg-slate-800">
+                                            <div className="flex items-center gap-2.5">
+                                                <div className="h-10 w-10 rounded-xl bg-sidebar/10 flex items-center justify-center text-sidebar">
+                                                    <Clock className="h-5 w-5" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-slate-900 dark:text-white">Recent Activity</h3>
+                                                    <p className="text-xs text-slate-500 font-medium">Real-time event tracking</p>
+                                                </div>
+                                            </div>
+                                            <Button 
+                                                variant="ghost" 
+                                                size="sm" 
+                                                onClick={fetchVendorData}
+                                                className="h-9 px-3 text-sidebar hover:bg-sidebar/5 font-semibold gap-2"
+                                            >
+                                                <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
+                                                Refresh
+                                            </Button>
                                         </div>
-                                        <div className="p-6">
-                                            <div className="space-y-6">
-                                                {activities.length === 0 ? (
-                                                    <div className="text-center py-8 text-slate-500 bg-slate-50 dark:bg-slate-900/50 rounded-xl border-2 border-dashed border-slate-100 dark:border-slate-800">
-                                                        <Clock className="h-10 w-10 mx-auto mb-3 text-slate-300" />
-                                                        <p className="text-sm font-medium">No activities recorded yet</p>
-                                                        <p className="text-xs text-slate-400 mt-1">Transactions and updates will appear here.</p>
+                                        <div className="p-0">
+                                            {activities.length === 0 ? (
+                                                <div className="p-12 text-center bg-slate-50/50 dark:bg-slate-900/50">
+                                                    <div className="h-16 w-16 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-center mx-auto mb-4">
+                                                        <Clock className="h-8 w-8 text-slate-300" />
                                                     </div>
-                                                ) : (
-                                                    <div className="relative space-y-6 before:absolute before:inset-0 before:ml-[4.5rem] before:h-full before:w-0.5 before:bg-slate-100 dark:before:bg-slate-800">
-                                                        {activities.map((activity) => {
-                                                            const { date, time } = formatDateTime(activity.date);
-                                                            return (
-                                                                <div key={activity.id} className="relative flex items-start gap-6 group">
-                                                                    <div className="flex flex-col items-end w-12 flex-shrink-0 pt-1">
-                                                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">{date}</span>
-                                                                        <span className="text-[10px] font-medium text-slate-400 mt-0.5">{time}</span>
+                                                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">No activity yet</h4>
+                                                    <p className="text-xs text-slate-500 mt-1 max-w-[200px] mx-auto leading-relaxed">System logs for transactions and updates will appear here automatically.</p>
+                                                </div>
+                                            ) : (
+                                                <div className="divide-y divide-slate-100 dark:divide-slate-700">
+                                                    {activities.map((activity) => {
+                                                        const { date, time } = formatDateTime(activity.date);
+                                                        const typeColors: Record<string, string> = {
+                                                            'bill': 'bg-blue-50 text-blue-600 border-blue-100',
+                                                            'payment': 'bg-green-50 text-green-600 border-green-100',
+                                                            'vendor_credit': 'bg-purple-50 text-purple-600 border-purple-100',
+                                                            'expense': 'bg-orange-50 text-orange-600 border-orange-100'
+                                                        };
+                                                        
+                                                        return (
+                                                            <div key={activity.id} className="p-6 flex gap-6 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-all duration-300 group">
+                                                                <div className="flex flex-col items-center gap-2 w-16 flex-shrink-0">
+                                                                    <span className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">{time.split(' ')[1]}</span>
+                                                                    <div className="h-10 w-10 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm flex items-center justify-center group-hover:scale-110 group-hover:border-sidebar/30 transition-all duration-300">
+                                                                        <span className="text-[10px] font-bold text-slate-900 dark:text-white">{time.split(' ')[0]}</span>
                                                                     </div>
-                                                                    <div className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-white dark:bg-slate-900 border-2 border-sidebar shadow-sm ring-4 ring-white dark:ring-slate-900 mt-1.5 transition-transform group-hover:scale-110">
-                                                                        <div className="h-1.5 w-1.5 rounded-full bg-sidebar"></div>
-                                                                    </div>
-                                                                    <div className="flex-1 bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 rounded-xl p-4 hover:bg-white dark:hover:bg-slate-800 hover:shadow-md transition-all duration-300">
-                                                                        <div className="flex items-center justify-between mb-1.5">
-                                                                            <h5 className="font-bold text-sm text-slate-900 dark:text-white">{activity.title}</h5>
-                                                                            <Badge variant="outline" className="text-[10px] h-4.5 bg-white dark:bg-slate-900 uppercase tracking-tighter font-bold">{activity.type}</Badge>
+                                                                    <div className="w-px h-full bg-slate-100 dark:bg-slate-800 group-last:hidden"></div>
+                                                                </div>
+                                                                <div className="flex-1 space-y-3">
+                                                                    <div className="flex items-center justify-between gap-4">
+                                                                        <div className="space-y-1">
+                                                                            <h5 className="font-bold text-sm text-slate-900 dark:text-white leading-tight">{activity.title}</h5>
+                                                                            <div className="flex items-center gap-2">
+                                                                                <Badge variant="outline" className={cn("text-[10px] px-1.5 h-4.5 font-black uppercase tracking-widest", typeColors[activity.type] || 'bg-slate-50 text-slate-500 border-slate-100')}>
+                                                                                    {activity.type.replace('_', ' ')}
+                                                                                </Badge>
+                                                                                <span className="text-[10px] font-bold text-slate-300 dark:text-slate-600">•</span>
+                                                                                <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase">{date}</span>
+                                                                            </div>
                                                                         </div>
-                                                                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-3">{activity.description}</p>
-                                                                        <div className="flex items-center gap-2 mt-auto pt-3 border-t border-slate-100/50 dark:border-slate-700/50">
-                                                                            <div className="h-5 w-5 rounded-full bg-sidebar/10 text-sidebar flex items-center justify-center text-[10px] font-bold uppercase">
+                                                                        <div className="flex -space-x-2">
+                                                                            <div className="h-8 w-8 rounded-full border-2 border-white dark:border-slate-800 bg-sidebar/10 text-sidebar flex items-center justify-center text-[10px] font-bold uppercase shadow-sm">
                                                                                 {activity.user.charAt(0)}
                                                                             </div>
-                                                                            <span className="text-[11px] text-slate-500">
-                                                                                by <span className="text-sidebar font-semibold">{activity.user}</span>
-                                                                            </span>
                                                                         </div>
                                                                     </div>
+                                                                    <div className="bg-white dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 p-4 rounded-2xl shadow-sm group-hover:border-sidebar/20 transition-all duration-300">
+                                                                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium">{activity.description}</p>
+                                                                    </div>
+                                                                    <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
+                                                                        <span>Modified by</span>
+                                                                        <span className="text-sidebar bg-sidebar/5 px-2 py-0.5 rounded-full">{activity.user}</span>
+                                                                    </div>
                                                                 </div>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                )}
-                                            </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
