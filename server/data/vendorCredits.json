@@ -229,7 +229,56 @@
       "status": "OPEN",
       "createdAt": "2026-02-10T12:06:51.886Z",
       "updatedAt": "2026-02-10T12:07:41.803Z"
+    },
+    {
+      "id": "vc-1770791936220",
+      "creditNumber": "VC-00025",
+      "referenceNumber": "",
+      "vendorId": "3",
+      "vendorName": "Ganesh K",
+      "orderNumber": "",
+      "date": "2026-02-11",
+      "subject": "Vendor Credit for Bill #16",
+      "reverseCharge": false,
+      "taxType": "tds",
+      "tdsTcs": "",
+      "items": [
+        {
+          "id": "item-1770791933771-0",
+          "itemId": "1770714286345::1770791906254",
+          "itemName": "digital bharat ",
+          "description": "",
+          "account": "cost_of_goods",
+          "quantity": 1,
+          "rate": "17000",
+          "tax": "gst_18",
+          "taxAmount": 3060,
+          "amount": 17000,
+          "billId": "1770791906254",
+          "billNumber": "16",
+          "billDate": "2026-02-11",
+          "balanceDue": 20000,
+          "billTotal": 20060,
+          "billStatus": "PARTIALLY_PAID",
+          "hsnSac": ""
+        }
+      ],
+      "subTotal": 17000,
+      "discountType": "percentage",
+      "discountValue": "",
+      "discountAmount": 0,
+      "cgst": 0,
+      "sgst": 0,
+      "igst": 0,
+      "tdsTcsAmount": 0,
+      "adjustment": 0,
+      "amount": 20060,
+      "balance": 20060,
+      "notes": "Created from Bill #16",
+      "status": "OPEN",
+      "createdAt": "2026-02-11T06:38:56.219Z",
+      "updatedAt": "2026-02-11T06:38:56.219Z"
     }
   ],
-  "nextCreditNumber": 25
+  "nextCreditNumber": 26
 }

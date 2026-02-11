@@ -1,6 +1,38 @@
 {
   "expenses": [
     {
+      "id": "13",
+      "organizationId": "1",
+      "expenseNumber": "EXP-00013",
+      "date": "2026-02-11",
+      "expenseAccount": "employee_advance",
+      "amount": 0,
+      "currency": "INR",
+      "paidThrough": "",
+      "expenseType": "services",
+      "sac": "",
+      "vendorId": "3",
+      "vendorName": "Ganesh K",
+      "gstTreatment": "Registered Business - Composition",
+      "sourceOfSupply": "Assam",
+      "destinationOfSupply": "[MH] - Maharashtra",
+      "reverseCharge": false,
+      "tax": "gst_12",
+      "taxAmount": 0,
+      "amountIs": "tax_exclusive",
+      "invoiceNumber": "",
+      "notes": "",
+      "customerId": "",
+      "customerName": "",
+      "reportingTags": [],
+      "isBillable": false,
+      "status": "recorded",
+      "attachments": [],
+      "createdAt": "2026-02-11T06:37:51.222Z",
+      "updatedAt": "2026-02-11T06:37:51.222Z",
+      "createdTime": "2026-02-11T06:37:51.222Z"
+    },
+    {
       "id": "12",
       "organizationId": "1",
       "expenseNumber": "EXP-00012",
@@ -87,6 +119,6 @@
     "defaultUnit": "km",
     "mileageRates": []
   },
-  "nextExpenseId": 13,
+  "nextExpenseId": 14,
   "nextMileageId": 3
 }

@@ -71,7 +71,43 @@
       "amountInWords": "Indian Rupee Fifteen Thousand Only",
       "journalEntries": [],
       "createdAt": "2026-02-09T07:39:28.819Z"
+    },
+    {
+      "id": "pr-1770791765877",
+      "paymentNumber": "87",
+      "date": "2026-02-11",
+      "referenceNumber": "",
+      "customerId": "2",
+      "customerName": "Mr. Ganesh K",
+      "customerEmail": "",
+      "invoices": [
+        {
+          "invoiceId": "1770791755307",
+          "invoiceNumber": "INV-00004",
+          "invoiceDate": "2026-02-11",
+          "invoiceAmount": 17700,
+          "amountDue": 17700,
+          "paymentAmount": 500
+        }
+      ],
+      "mode": "cash",
+      "depositTo": "Petty Cash",
+      "amount": 500,
+      "unusedAmount": 0,
+      "bankCharges": 0,
+      "tax": "",
+      "taxAmount": 0,
+      "notes": "Payment for INV-00004",
+      "attachments": [],
+      "sendThankYou": false,
+      "status": "PAID",
+      "paymentType": "invoice_payment",
+      "placeOfSupply": "",
+      "descriptionOfSupply": "",
+      "amountInWords": "Indian Rupee Five Hundred Only",
+      "journalEntries": [],
+      "createdAt": "2026-02-11T06:36:05.877Z"
     }
   ],
-  "nextPaymentNumber": 87
+  "nextPaymentNumber": 88
 }

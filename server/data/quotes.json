@@ -1,6 +1,72 @@
 {
   "quotes": [
     {
+      "id": "1770791750237",
+      "quoteNumber": "QT-000002",
+      "referenceNumber": "",
+      "date": "2026-02-11",
+      "expiryDate": "",
+      "customerId": "2",
+      "customerName": "Mr. Ganesh K",
+      "billingAddress": {},
+      "shippingAddress": {},
+      "salesperson": "",
+      "projectName": "",
+      "subject": "",
+      "placeOfSupply": "",
+      "pdfTemplate": "Standard Template",
+      "items": [
+        {
+          "id": "1",
+          "itemId": "1770351067854",
+          "name": "Laptop",
+          "description": "",
+          "quantity": 1,
+          "unit": "",
+          "rate": 15000,
+          "discount": 0,
+          "discountType": "percentage",
+          "tax": 18,
+          "taxName": "GST18",
+          "amount": 15000
+        }
+      ],
+      "subTotal": 15000,
+      "shippingCharges": 0,
+      "tdsType": "",
+      "tdsAmount": 0,
+      "cgst": 1350,
+      "sgst": 1350,
+      "igst": 0,
+      "adjustment": 0,
+      "total": 17700,
+      "customerNotes": "",
+      "termsAndConditions": "",
+      "status": "CONVERTED",
+      "emailRecipients": [],
+      "createdAt": "2026-02-11T06:35:50.237Z",
+      "updatedAt": "2026-02-11T06:35:55.307Z",
+      "createdBy": "Admin User",
+      "activityLogs": [
+        {
+          "id": "1",
+          "timestamp": "2026-02-11T06:35:50.237Z",
+          "action": "created",
+          "description": "Quote created for ₹17,700",
+          "user": "Admin User"
+        },
+        {
+          "id": "2",
+          "timestamp": "2026-02-11T06:35:55.307Z",
+          "action": "converted",
+          "description": "Converted to Invoice INV-00004",
+          "user": "Admin User",
+          "link": "/invoices/1770791755307"
+        }
+      ],
+      "convertedTo": "invoice"
+    },
+    {
       "id": "1770367332795",
       "quoteNumber": "QT-000001",
       "referenceNumber": "123",
@@ -88,5 +154,5 @@
       "convertedTo": "sales-order"
     }
   ],
-  "nextQuoteNumber": 2
+  "nextQuoteNumber": 3
 }

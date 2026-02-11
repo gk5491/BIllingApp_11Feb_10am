@@ -1,6 +1,96 @@
 {
   "invoices": [
     {
+      "id": "1770791755307",
+      "invoiceNumber": "INV-00004",
+      "referenceNumber": "",
+      "date": "2026-02-11",
+      "dueDate": "2026-03-13",
+      "customerId": "2",
+      "customerName": "Mr. Ganesh K",
+      "billingAddress": {},
+      "shippingAddress": {},
+      "salesperson": "",
+      "placeOfSupply": "",
+      "paymentTerms": "Net 30",
+      "items": [
+        {
+          "id": "1",
+          "itemId": "1770351067854",
+          "name": "Laptop",
+          "description": "",
+          "quantity": 1,
+          "unit": "",
+          "rate": 15000,
+          "discount": 0,
+          "discountType": "percentage",
+          "tax": 18,
+          "taxName": "GST18",
+          "amount": 15000
+        }
+      ],
+      "subTotal": 15000,
+      "shippingCharges": 0,
+      "cgst": 1350,
+      "sgst": 1350,
+      "igst": 0,
+      "adjustment": 0,
+      "total": 17700,
+      "amountPaid": 700,
+      "balanceDue": 17000,
+      "customerNotes": "",
+      "termsAndConditions": "",
+      "status": "PARTIALLY_PAID",
+      "sourceType": "quote",
+      "sourceId": "1770791750237",
+      "sourceNumber": "QT-000002",
+      "pdfTemplate": "Standard Template",
+      "createdAt": "2026-02-11T06:35:55.307Z",
+      "updatedAt": "2026-02-11T06:36:05.877Z",
+      "createdBy": "Admin User",
+      "payments": [
+        {
+          "id": "1770791765877",
+          "date": "2026-02-11T06:35:00.000Z",
+          "amount": 500,
+          "paymentMode": "cash",
+          "reference": "",
+          "notes": ""
+        }
+      ],
+      "activityLogs": [
+        {
+          "id": "1",
+          "timestamp": "2026-02-11T06:35:55.307Z",
+          "action": "created",
+          "description": "Invoice created from Quote QT-000002",
+          "user": "Admin User"
+        },
+        {
+          "id": "2",
+          "timestamp": "2026-02-11T06:36:05.877Z",
+          "action": "payment_recorded",
+          "description": "Payment of ₹500 recorded",
+          "user": "Admin User"
+        },
+        {
+          "id": "1770791814911.8699",
+          "timestamp": "2026-02-11T06:36:54.911Z",
+          "action": "credit_applied",
+          "description": "Applied ₹200 from Credit Note CN-00004",
+          "user": "Admin User"
+        }
+      ],
+      "creditsApplied": [
+        {
+          "creditNoteId": "1770791805390",
+          "creditNoteNumber": "CN-00004",
+          "amount": 200,
+          "appliedDate": "2026-02-11T06:36:54.911Z"
+        }
+      ]
+    },
+    {
       "id": "1770715122801",
       "organizationId": "1",
       "invoiceNumber": "INV-00003",
@@ -333,5 +423,5 @@
       ]
     }
   ],
-  "nextInvoiceNumber": 4
+  "nextInvoiceNumber": 5
 }

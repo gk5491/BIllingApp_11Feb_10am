@@ -1,6 +1,114 @@
 {
   "bills": [
     {
+      "id": "1770791906254",
+      "organizationId": "1",
+      "billNumber": "16",
+      "purchaseOrderId": "1770791894014",
+      "orderNumber": "PO-2025-0008",
+      "vendorId": "3",
+      "vendorName": "Ganesh K",
+      "vendorAddress": {
+        "street1": "mh12",
+        "street2": "pune",
+        "city": "pune",
+        "state": "[MH] - Maharashtra",
+        "pinCode": "72432",
+        "countryRegion": "India"
+      },
+      "billDate": "2026-02-11",
+      "dueDate": "2026-02-11",
+      "paymentTerms": "Due on Receipt",
+      "reverseCharge": false,
+      "subject": "Bill for PO# PO-2025-0008",
+      "items": [
+        {
+          "id": "1",
+          "itemId": "1770714286345",
+          "itemName": "digital bharat ",
+          "description": "",
+          "account": "cost_of_goods",
+          "quantity": 1,
+          "rate": 17000,
+          "tax": "gst_18",
+          "taxAmount": 3060,
+          "amount": 20060
+        }
+      ],
+      "subTotal": 17000,
+      "discountType": "percent",
+      "discountValue": 0,
+      "discountAmount": 0,
+      "taxType": "TDS",
+      "taxCategory": "none",
+      "taxAmount": 3060,
+      "adjustment": 0,
+      "adjustmentDescription": "",
+      "total": 20060,
+      "amountPaid": 60,
+      "balanceDue": 20000,
+      "notes": "",
+      "attachments": [],
+      "status": "PARTIALLY_PAID",
+      "pdfTemplate": "Standard Template",
+      "createdAt": "2026-02-11T06:38:26.253Z",
+      "updatedAt": "2026-02-11T06:38:56.219Z",
+      "createdBy": "Admin User",
+      "activityLogs": [
+        {
+          "id": "1",
+          "timestamp": "2026-02-11T06:38:26.253Z",
+          "action": "created",
+          "description": "Bill created from Purchase Order PO# PO-2025-0008",
+          "user": "Admin User"
+        },
+        {
+          "id": "2",
+          "timestamp": "2026-02-11T06:38:31.125Z",
+          "action": "updated",
+          "description": "Bill updated. New total: ₹20060.00, Balance due: ₹20060.00",
+          "user": "Admin User"
+        },
+        {
+          "id": "3",
+          "timestamp": "2026-02-11T06:38:39.325Z",
+          "action": "payment",
+          "description": "Payment of ₹60 recorded",
+          "user": "Admin User"
+        },
+        {
+          "id": "1770791936221",
+          "timestamp": "2026-02-11T06:38:56.219Z",
+          "action": "credit_applied",
+          "description": "Vendor Credit VC-00025 applied: ₹0",
+          "user": "Admin User"
+        }
+      ],
+      "tcsType": "TCS",
+      "tcsCategory": "none",
+      "tcsValue": 0,
+      "tdsValue": 0,
+      "tcsAmount": 0,
+      "tdsAmount": 0,
+      "paymentsRecorded": [
+        {
+          "paymentId": "direct-1770791919325",
+          "paymentNumber": "PM-00087",
+          "amount": 60,
+          "date": "2026-02-11",
+          "mode": "Cash"
+        }
+      ],
+      "creditsApplied": [
+        {
+          "creditId": "vc-1770791936220",
+          "creditNumber": "VC-00025",
+          "amount": 0,
+          "appliedDate": "2026-02-11"
+        }
+      ]
+    },
+    {
       "id": "1770714311808",
       "organizationId": "1",
       "billNumber": "15",
@@ -532,7 +640,7 @@
       ]
     }
   ],
-  "nextBillNumber": 16,
+  "nextBillNumber": 17,
   "accounts": [
     {
       "id": "1",
