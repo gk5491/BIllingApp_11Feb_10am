@@ -6111,9 +6111,9 @@ export async function registerRoutes(
         inv.customerId === cn.customerId &&
         inv.status?.toLowerCase() !== 'paid' &&
         inv.status?.toLowerCase() !== 'void' &&
-        (inv.balance || 0) > 0
+        (Number(inv.balanceDue) || 0) > 0
       );
-      res.json(unpaidInvoices);
+      res.json({ success: true, data: unpaidInvoices });
     } catch (error) {
       res.status(500).json({ success: false, message: "Failed to fetch unpaid invoices" });
     }
@@ -6130,8 +6130,10 @@ export async function registerRoutes(
       const cnIndex = creditNotesData.creditNotes.findIndex((c: any) => c.id === req.params.id);
       if (cnIndex === -1) return res.status(404).json({ success: false, message: "Credit note not found" });
 
+      const cn = creditNotesData.creditNotes[cnIndex];
       const invoicesData = readInvoicesData();
       let totalApplied = 0;
+      const now = new Date().toISOString();
 
       for (const app of applications) {
         const invIndex = invoicesData.invoices.findIndex((inv: any) => inv.id === app.invoiceId);
@@ -6139,21 +6141,68 @@ export async function registerRoutes(
           const inv = invoicesData.invoices[invIndex];
           const applyAmount = Number(app.amount) || 0;
           inv.balanceDue = (Number(inv.balanceDue) || 0) - applyAmount;
+          inv.amountPaid = (Number(inv.amountPaid) || 0) + applyAmount;
+          
           if (inv.balanceDue <= 0) {
             inv.balanceDue = 0;
             inv.status = 'PAID';
+          } else if (inv.amountPaid > 0) {
+            inv.status = 'PARTIALLY_PAID';
           }
+          
           totalApplied += applyAmount;
+
+          // Add to creditsApplied list for the invoice
+          inv.creditsApplied = inv.creditsApplied || [];
+          inv.creditsApplied.push({
+            creditNoteId: cn.id,
+            creditNoteNumber: cn.creditNoteNumber,
+            amount: applyAmount,
+            appliedDate: now
+          });
+
+          // Log activity for invoice
+          inv.activityLogs = inv.activityLogs || [];
+          inv.activityLogs.push({
+            id: String(Date.now() + Math.random()),
+            timestamp: now,
+            action: 'credit_applied',
+            description: `Applied ₹${applyAmount.toLocaleString('en-IN')} from Credit Note ${cn.creditNoteNumber}`,
+            user: req.body.appliedBy || "Admin User"
+          });
         }
       }
 
-      const cn = creditNotesData.creditNotes[cnIndex];
+      // Update credit note remaining balance and status
       cn.creditsRemaining = (Number(cn.creditsRemaining) || 0) - totalApplied;
       if (cn.creditsRemaining <= 0) {
         cn.creditsRemaining = 0;
-        cn.status = 'Closed';
+        cn.status = 'CLOSED';
       }
 
+      cn.invoicesApplied = cn.invoicesApplied || [];
+      applications.forEach((app: any) => {
+        const inv = invoicesData.invoices.find((i: any) => i.id === app.invoiceId);
+        if (inv) {
+          cn.invoicesApplied.push({
+            invoiceId: inv.id,
+            invoiceNumber: inv.invoiceNumber,
+            amount: app.amount,
+            appliedDate: now
+          });
+        }
+      });
+
+      cn.activityLogs = cn.activityLogs || [];
+      cn.activityLogs.push({
+        id: String(Date.now() + Math.random()),
+        timestamp: now,
+        action: 'credits_applied',
+        description: `Applied ₹${totalApplied.toLocaleString('en-IN')} to invoices`,
+        user: req.body.appliedBy || "Admin User"
+      });
+
+      creditNotesData.creditNotes[cnIndex] = cn;
       writeCreditNotesData(creditNotesData);
       writeInvoicesData(invoicesData);
 

@@ -1471,7 +1471,10 @@ function CreditNoteDetailPanel({ creditNote, branding, organization, onClose, on
     if (showApplyDialog) {
       fetch(`/api/credit-notes/${creditNote.id}/unpaid-invoices`)
         .then(res => res.json())
-        .then(data => setUnpaidInvoices(data))
+        .then(data => {
+          const invoices = Array.isArray(data) ? data : (data.success ? (data.data || []) : []);
+          setUnpaidInvoices(invoices);
+        })
         .catch(err => console.error("Failed to fetch unpaid invoices", err));
     }
   }, [showApplyDialog, creditNote.id]);
