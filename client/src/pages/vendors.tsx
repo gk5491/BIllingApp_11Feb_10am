@@ -247,6 +247,14 @@ function VendorDetailPanel({ vendor, onClose, onEdit, onDelete }: VendorDetailPa
     const [activities, setActivities] = useState<ActivityItem[]>([]);
     const [loading, setLoading] = useState(false);
     const [fullVendor, setFullVendor] = useState<Vendor>(vendor);
+    const formatDateTime = (dateString: string) => {
+        const date = new Date(dateString);
+        return {
+            date: date.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+            time: date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })
+        };
+    };
+
     const combinedTransactions = useMemo(() => {
         const all = [
             ...(transactions.bills || []).map(b => ({ ...b, tType: 'Bill', displayAmount: b.amount, isCredit: true })),
@@ -728,21 +736,71 @@ function VendorDetailPanel({ vendor, onClose, onEdit, onDelete }: VendorDetailPa
                                     </div>
                                 )}
 
-                                {/* Remarks Section */}
-                                {fullVendor.remarks && (
+                                    {fullVendor.remarks && (
+                                        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden col-span-1 lg:col-span-2">
+                                            <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex items-center gap-2">
+                                                <Notebook className="h-5 w-5 text-amber-500" />
+                                                <h3 className="font-semibold text-slate-900 dark:text-white">Internal Remarks</h3>
+                                            </div>
+                                            <div className="p-5">
+                                                <div className="bg-amber-50/50 dark:bg-amber-900/10 p-4 rounded-xl border border-amber-100 dark:border-amber-900/20">
+                                                    <p className="text-sm text-slate-700 dark:text-slate-300 italic">"{fullVendor.remarks}"</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Activity Timeline Section */}
                                     <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden col-span-1 lg:col-span-2">
                                         <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 flex items-center gap-2">
-                                            <Notebook className="h-5 w-5 text-amber-500" />
-                                            <h3 className="font-semibold text-slate-900 dark:text-white">Internal Remarks</h3>
+                                            <Clock className="h-5 w-5 text-sidebar" />
+                                            <h3 className="font-semibold text-slate-900 dark:text-white">Activity Timeline</h3>
                                         </div>
-                                        <div className="p-5">
-                                            <div className="bg-amber-50/50 dark:bg-amber-900/10 p-4 rounded-xl border border-amber-100 dark:border-amber-900/20">
-                                                <p className="text-sm text-slate-700 dark:text-slate-300 italic">"{fullVendor.remarks}"</p>
+                                        <div className="p-6">
+                                            <div className="space-y-6">
+                                                {activities.length === 0 ? (
+                                                    <div className="text-center py-8 text-slate-500 bg-slate-50 dark:bg-slate-900/50 rounded-xl border-2 border-dashed border-slate-100 dark:border-slate-800">
+                                                        <Clock className="h-10 w-10 mx-auto mb-3 text-slate-300" />
+                                                        <p className="text-sm font-medium">No activities recorded yet</p>
+                                                        <p className="text-xs text-slate-400 mt-1">Transactions and updates will appear here.</p>
+                                                    </div>
+                                                ) : (
+                                                    <div className="relative space-y-6 before:absolute before:inset-0 before:ml-[4.5rem] before:h-full before:w-0.5 before:bg-slate-100 dark:before:bg-slate-800">
+                                                        {activities.map((activity) => {
+                                                            const { date, time } = formatDateTime(activity.date);
+                                                            return (
+                                                                <div key={activity.id} className="relative flex items-start gap-6 group">
+                                                                    <div className="flex flex-col items-end w-12 flex-shrink-0 pt-1">
+                                                                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tight">{date}</span>
+                                                                        <span className="text-[10px] font-medium text-slate-400 mt-0.5">{time}</span>
+                                                                    </div>
+                                                                    <div className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-white dark:bg-slate-900 border-2 border-sidebar shadow-sm ring-4 ring-white dark:ring-slate-900 mt-1.5 transition-transform group-hover:scale-110">
+                                                                        <div className="h-1.5 w-1.5 rounded-full bg-sidebar"></div>
+                                                                    </div>
+                                                                    <div className="flex-1 bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 rounded-xl p-4 hover:bg-white dark:hover:bg-slate-800 hover:shadow-md transition-all duration-300">
+                                                                        <div className="flex items-center justify-between mb-1.5">
+                                                                            <h5 className="font-bold text-sm text-slate-900 dark:text-white">{activity.title}</h5>
+                                                                            <Badge variant="outline" className="text-[10px] h-4.5 bg-white dark:bg-slate-900 uppercase tracking-tighter font-bold">{activity.type}</Badge>
+                                                                        </div>
+                                                                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-3">{activity.description}</p>
+                                                                        <div className="flex items-center gap-2 mt-auto pt-3 border-t border-slate-100/50 dark:border-slate-700/50">
+                                                                            <div className="h-5 w-5 rounded-full bg-sidebar/10 text-sidebar flex items-center justify-center text-[10px] font-bold uppercase">
+                                                                                {activity.user.charAt(0)}
+                                                                            </div>
+                                                                            <span className="text-[11px] text-slate-500">
+                                                                                by <span className="text-sidebar font-semibold">{activity.user}</span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
-                                )}
-                            </div>
+                                </div>
                         </div>
                     </div>
                 </TabsContent>
