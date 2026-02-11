@@ -18,7 +18,7 @@ I want iterative development. Ask before making major changes. I prefer detailed
 
 ### Technical Implementations
 - **Backend Server**: Express 4
-- **Database**: PostgreSQL (Neon) managed with Drizzle ORM.
+- **Database**: PostgreSQL (Replit built-in) managed with Drizzle ORM using `pg` driver.
 - **API Versioning**: All API routes are prefixed with `/api/v1`.
 - **Authentication**: JWT-based authentication (prepared for implementation).
 - **Validation**: Zod schemas used for both frontend and backend validation.
